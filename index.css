@@ -42,9 +42,6 @@
     padding: 5px;
     width: 190px;
     margin: 10px;
-font-variant-position: sub;
-
-
 }
 
 .res-container{
@@ -65,8 +62,34 @@ font-variant-position: sub;
 
 .res-logo{
     width:100%;
+}
 
+.filter-btn{
 
+    margin: 10px;
+    cursor: pointer;
+}
+
+.shimmer-container{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.shimmer-card{
+    height: 400px;
+    width: 200px;
+    background-color: #f0f0f0;
+    margin: 10px;
+}
+
+.login{
+    margin: 10px;
+    height: 40px;
+    width: 60px;
+    cursor: pointer;
 }
 
 
+.filter{
+    display: flex;
+}
