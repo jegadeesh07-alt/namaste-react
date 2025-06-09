@@ -1,95 +1,107 @@
-.header{
-    height: 120px;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    border: 1px solid black;
-
+.header {
+  height: 120px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  border: 1px solid black;
 }
-.logo{
-    margin-bottom: 30px;
-    width: 200px;
-
+.logo {
+  margin-bottom: 30px;
+  width: 200px;
 }
 .nav-items {
-    padding: 0px 2px;
-
+  padding: 0px 2px;
 }
 
 .nav-items > ul {
-    font-size: 20px;
-    display: flex;
-    list-style-type: none;
-    margin-right: 20px;
+  font-size: 20px;
+  display: flex;
+  list-style-type: none;
+  margin-right: 20px;
 }
 
-.nav-items > ul > li{
-    padding: 10px;
-    margin: 10px;
-    color: lightslategray;
-
+.nav-items > ul > li {
+  padding: 10px;
+  margin: 10px;
+  color: lightslategray;
 }
-.nav-items > ul > li:hover{
-    color: black;
-    cursor: pointer;
+.nav-items > ul > li:hover {
+  color: black;
+  cursor: pointer;
+}
+
+.nav-items {
+  color: lightslategrey;
+}
+.nav-items:hover {
+  color: black;
 }
 
 /* .body{
 
 } */
 
-.res-card{
-    padding: 5px;
-    width: 190px;
-    margin: 10px;
+.res-list{
+  text-decoration: none;
+  color: rgb(22, 22, 22);
 }
 
-.res-container{
-    display: flex;
-    flex-wrap: wrap;
+.res-card {
+  padding: 5px;
+  width: 190px;
+  margin: 10px;
+  height: 504px;
 
-    
+
 }
 
-.res-card:hover{
-    border: 1px solid black;
-    cursor: pointer;
+.res-container {
+  display: flex;
+  flex-wrap: wrap;
 }
 
-.search{
-    padding:10px ;
+.res-card:hover {
+  border: 1px solid black;
+  cursor: pointer;
 }
 
-.res-logo{
-    width:100%;
+.search {
+  padding: 10px;
 }
 
-.filter-btn{
-
-    margin: 10px;
-    cursor: pointer;
+.res-logo {
+  width: 100%;
 }
 
-.shimmer-container{
-    display: flex;
-    flex-wrap: wrap;
+.filter-btn {
+  margin: 10px;
+  cursor: pointer;
 }
 
-.shimmer-card{
-    height: 400px;
-    width: 200px;
-    background-color: #f0f0f0;
-    margin: 10px;
+.shimmer-container {
+  display: flex;
+  flex-wrap: wrap;
 }
 
-.login{
-    margin: 10px;
-    height: 40px;
-    width: 60px;
-    cursor: pointer;
+.shimmer-card {
+  height: 400px;
+  width: 200px;
+  background-color: #f0f0f0;
+  margin: 10px;
 }
 
+.login {
+  margin: 10px;
+  height: 40px;
+  width: 60px;
+  cursor: pointer;
+}
 
-.filter{
-    display: flex;
+.filter {
+  display: flex;
+}
+
+.user-card{
+  padding: 10px;
+  border:1px solid black;
 }

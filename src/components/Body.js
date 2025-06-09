@@ -2,10 +2,11 @@ import RestaurantCard from "./RestaurantCard.js";
 import { useEffect, useState } from "react";
 import Shimmer from "./Shimmer.js";
 import { FaSearch } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const Body = () => {
   const [listOfRestaurant, setListOfRestaurant] = useState([]);
-  const [filteredRes, setFilteredRes] = useState([])
+  const [filteredRes, setFilteredRes] = useState([]);
   const [searchText, setSearchText] = useState(" ");
 
   useEffect(() => {
@@ -19,29 +20,33 @@ const Body = () => {
 
     const json = await data.json();
 
-    console.log(json);
+    // console.log(json);
+
     setListOfRestaurant(
       json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants
     );
     setFilteredRes(
       json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants
-    )
+    );
   };
 
   const handleClick = () => {
     const filteredList = listOfRestaurant.filter(
       (res) => res.info.avgRating >= 4.5
     );
-    setListOfRestaurant(filteredList);
     console.log(filteredList);
+    setFilteredRes(filteredList);
   };
 
   const handleFilter = () => {
-    const filteredRes = listOfRestaurant.filter((res) =>{
-      return res.info.name.trim().toLowerCase().includes(searchText.trim().toLowerCase())
-    })
-    setFilteredRes(filteredRes)
-  }
+    const filteredRes = listOfRestaurant.filter((res) => {
+      return res.info.name
+        .trim()
+        .toLowerCase()
+        .includes(searchText.trim().toLowerCase());
+    });
+    setFilteredRes(filteredRes);
+  };
 
   return listOfRestaurant.length === 0 ? (
     <Shimmer />
@@ -61,7 +66,7 @@ const Body = () => {
           <button
             className="search-icon"
             onClick={() => {
-              handleFilter()
+              handleFilter();
             }}
           >
             <FaSearch />
@@ -71,6 +76,7 @@ const Body = () => {
           className="filter-btn"
           onClick={() => {
             handleClick();
+            console.log("button clicked");
           }}
         >
           Top Rated Restaurant
@@ -78,7 +84,10 @@ const Body = () => {
       </div>
       <div className="res-container">
         {filteredRes.map((res) => (
-          <RestaurantCard key={res.info.id} resData={res} />
+          <Link className="res-list" key={res.info.id} 
+                to={"/restaurants/" + res.info.id}>
+                <RestaurantCard resData={res} />
+          </Link>
         ))}
       </div>
     </div>
