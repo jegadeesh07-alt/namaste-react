@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import Shimmer from "./Shimmer.js";
 import { FaSearch } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import useOnlineStatus from "../utils/useOnlineStatus.js";
 
 const Body = () => {
   const [listOfRestaurant, setListOfRestaurant] = useState([]);
@@ -29,6 +30,15 @@ const Body = () => {
       json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants
     );
   };
+
+  const onlineStatus = useOnlineStatus();
+
+  if (onlineStatus === false)
+    return (
+      <h1>
+        looks like you're in offline !! please check your internet connection
+      </h1>
+    );
 
   const handleClick = () => {
     const filteredList = listOfRestaurant.filter(
@@ -84,9 +94,12 @@ const Body = () => {
       </div>
       <div className="res-container">
         {filteredRes.map((res) => (
-          <Link className="res-list" key={res.info.id} 
-                to={"/restaurants/" + res.info.id}>
-                <RestaurantCard resData={res} />
+          <Link
+            className="res-list"
+            key={res.info.id}
+            to={"/restaurants/" + res.info.id}
+          >
+            <RestaurantCard resData={res} />
           </Link>
         ))}
       </div>

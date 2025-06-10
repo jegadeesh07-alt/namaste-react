@@ -2,9 +2,12 @@ import { FaCartPlus } from "react-icons/fa6";
 import { LOGO_URL } from "../utils/constants.js";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import useOnlineStatus from "../utils/useOnlineStatus.js";
 
 const Header = () => {
   const [btnNameReact, setBtnNameReact] = useState("Login");
+
+  const onlineStatus = useOnlineStatus()
 
   return (
     <div className="header">
@@ -13,6 +16,9 @@ const Header = () => {
       </div>
       <div className="nav-items">
         <ul>
+          <li>
+            Online Status : {onlineStatus ? "✔️" : "❌"}
+          </li>
           <li>
             <Link
               className="nav-items"
@@ -38,6 +44,15 @@ const Header = () => {
               style={{ textDecoration: "none" }}
             >
               Contact Us
+            </Link>
+            </li>
+            <li>
+            <Link
+              className="nav-items"
+              to="/grocery"
+              style={{ textDecoration: "none" }}
+            >
+              Grocery
             </Link>
           </li>
           <li>
