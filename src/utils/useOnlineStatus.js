@@ -4,7 +4,7 @@ const useOnlineStatus = () => {
     const [ onlineStatus, setOflineStatus ] = useState(true)
 
     useEffect(() => {
-        window.addEventListener("ofline", () => {
+        window.addEventListener("offline", () => {
            setOflineStatus(false)
         })
         window.addEventListener("online", () => {

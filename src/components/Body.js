@@ -1,14 +1,18 @@
-import RestaurantCard from "./RestaurantCard.js";
-import { useEffect, useState } from "react";
+import RestaurantCard, { withPromotedLabel } from "./RestaurantCard.js";
+import { useContext, useEffect, useState } from "react";
 import Shimmer from "./Shimmer.js";
+import Button from "@mui/material/Button";
 import { FaSearch } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import UserContext from "../utils/UserContext.js";
 import useOnlineStatus from "../utils/useOnlineStatus.js";
 
 const Body = () => {
   const [listOfRestaurant, setListOfRestaurant] = useState([]);
   const [filteredRes, setFilteredRes] = useState([]);
   const [searchText, setSearchText] = useState(" ");
+
+  const ResWithPromoted = withPromotedLabel(RestaurantCard);
 
   useEffect(() => {
     fetchData();
@@ -21,7 +25,7 @@ const Body = () => {
 
     const json = await data.json();
 
-    // console.log(json);
+    console.log(json);
 
     setListOfRestaurant(
       json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants
@@ -32,6 +36,8 @@ const Body = () => {
   };
 
   const onlineStatus = useOnlineStatus();
+
+  const { loggedInUser, setUserName } = useContext(UserContext);
 
   if (onlineStatus === false)
     return (
@@ -62,44 +68,61 @@ const Body = () => {
     <Shimmer />
   ) : (
     <div className="body">
-      <div className="filter">
-        <div className="search">
+      <div className="flex justify-center">
+        <div className="m-4 p-4 items-center ">
           <input
             type="text"
             placeholder="Search Items"
-            className="search-bar"
+            className="mt-0.5 border border-solid border-black"
             value={searchText}
             onChange={(e) => {
               setSearchText(e.target.value);
             }}
           />
-          <button
-            className="search-icon"
+          <Button
+            variant="text"
+            className="rounded-lg px-2 py-1.5 m-2 items-center bg-green-100"
             onClick={() => {
               handleFilter();
             }}
           >
             <FaSearch />
-          </button>
+          </Button>
         </div>
-        <button
-          className="filter-btn"
-          onClick={() => {
-            handleClick();
-            console.log("button clicked");
-          }}
-        >
-          Top Rated Restaurant
-        </button>
+        <div className="flex items-center m-4 p-4">
+          <Button
+            variant="contained"
+            className="px-2 mb-0.5 m-2"
+            onClick={() => {
+              handleClick();
+              console.log("button clicked");
+            }}
+          >
+            Top Rated Restaurant
+          </Button>
+          <div className="pl-4 ">
+            <label>UserName : </label>
+            <input
+              type="text"
+              value={loggedInUser}
+              className="border border-black p-1.5 "
+              onChange={(e) => setUserName(e.target.value)}
+            />
+          </div>
+        </div>
       </div>
-      <div className="res-container">
+      <div className="flex flex-wrap ">
         {filteredRes.map((res) => (
           <Link
             className="res-list"
             key={res.info.id}
             to={"/restaurants/" + res.info.id}
           >
-            <RestaurantCard resData={res} />
+            {res.info.promoted ? (
+              <ResWithPromoted />
+            ) : (
+              <RestaurantCard resData={res} />
+            )}
           </Link>
         ))}
       </div>
